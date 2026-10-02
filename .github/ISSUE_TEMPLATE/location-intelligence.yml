@@ -1,0 +1,74 @@
+name: Location intelligence
+description: Submit evidence-backed local knowledge for a Shorewise location
+title: "Location: "
+labels:
+  - location-research
+body:
+  - type: markdown
+    attributes:
+      value: Please distinguish confirmed facts from personal experience. Do not share private access or personal data without permission.
+  - type: input
+    id: location
+    attributes:
+      label: Location and exact launch
+      placeholder: Name, map link or coordinates
+    validations:
+      required: true
+  - type: checkboxes
+    id: sports
+    attributes:
+      label: Documented activities
+      options:
+        - label: SUP
+        - label: Wing foil
+        - label: Windsurf
+        - label: Kitesurf
+        - label: Surf or SUP surf
+  - type: dropdown
+    id: evidence
+    attributes:
+      label: Evidence type
+      options:
+        - Operator or school
+        - Club or governing body
+        - Harbour, council or access authority
+        - Published route or guide
+        - Experienced local knowledge
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source links and date checked
+      description: Include the original source wherever possible.
+    validations:
+      required: true
+  - type: textarea
+    id: conditions
+    attributes:
+      label: Conditions and ability levels
+      description: Suitable and unsafe wind sectors, tide window, waves, river level and beginner/intermediate/advanced distinctions.
+    validations:
+      required: true
+  - type: textarea
+    id: hazards
+    attributes:
+      label: Known hazards
+      description: Currents, rips, weirs, tidal races, shipping, mud, rocks, poor exits, seasonal restrictions or water-quality issues.
+    validations:
+      required: true
+  - type: textarea
+    id: planb
+    attributes:
+      label: Nearby Plan B
+      description: Where would you go instead, in which conditions, and why is it safer or more suitable?
+  - type: textarea
+    id: local_three
+    attributes:
+      label: Your local top three
+      description: Best beginner flat water, weather-dependent alternative and experienced-rider option.
+  - type: textarea
+    id: contributor
+    attributes:
+      label: Relevant local experience
+      description: Keep this general. Do not post private contact information.
