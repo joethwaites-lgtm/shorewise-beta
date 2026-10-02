@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#071b26">
+  <meta name="description" content="Plain-English watersports conditions and safety guidance for UK paddleboarders and wind sports.">
+  <title>Shorewise — Know before you launch</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23071b26'/%3E%3Cpath d='M10 36c8-12 16 12 24 0s16 12 22 0' fill='none' stroke='%2344d6b7' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M10 23h29' stroke='%23f4c95d' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='m35 15 9 8-9 8' fill='none' stroke='%23f4c95d' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Shorewise home"><span class="brand-mark">≈</span><span>shorewise</span></a>
+    <button class="demo-pill live-pill" id="refreshButton" type="button" title="Refresh live forecast"><span></span><b id="liveStatus">Choose a pin</b> ↻</button>
+    <button class="profile-button" id="profileButton" type="button" aria-label="Edit your setup"><span id="profileInitials">SB</span><span class="profile-label">My setup</span></button>
+  </header>
+
+  <main>
+    <section class="controls" aria-label="Forecast controls">
+      <div class="spot-control">
+        <label for="spotSelect">Checking conditions at</label>
+        <div class="select-wrap">
+          <span class="pin">●</span>
+          <select id="spotSelect">
+            <option value="brighton">Brighton West Pier</option>
+          </select>
+        </div>
+      </div>
+      <div class="segmented activity-picker" aria-label="What do you want to do?">
+        <button class="active" data-mode="paddle">SUP</button>
+        <button data-mode="wind">Wind sports</button>
+      </div>
+      <div class="skill-chip"><span>Skill</span><button id="skillQuick" type="button">Beginner</button></div>
+    </section>
+
+    <section class="map-explorer panel">
+      <div class="map-toolbar">
+        <div><span class="eyebrow">EXPLORE THE UK</span><h1>Find water that fits today</h1></div>
+        <div class="map-legend"><span><i class="green"></i> Good</span><span><i class="amber"></i> Caution</span><span><i class="red"></i> Avoid</span><span><i class="grey"></i> Loading</span></div>
+      </div>
+      <div class="map-stage card-hidden">
+        <div id="map" aria-label="Interactive map of curated UK watersports locations"></div>
+        <canvas id="windField" aria-hidden="true"></canvas>
+        <div class="map-zoom" role="group" aria-label="Map zoom"><button id="mapZoomIn" type="button" aria-label="Zoom in">+</button><button id="mapZoomOut" type="button" aria-label="Zoom out">−</button></div>
+        <div class="map-mode" role="group" aria-label="Map view"><button class="active" data-layer="roads">Roads</button><button data-layer="aerial">Aerial</button><button data-layer="terrain">Terrain</button></div>
+        <button class="map-info-toggle" id="mapInfoToggle" type="button" aria-expanded="false">Show spot card</button>
+        <aside class="map-card" id="mapCard">
+          <span class="map-type" id="mapType">COASTAL LAUNCH</span>
+          <h2 id="mapSpotName">Choose a location</h2>
+          <div class="map-signal"><span id="mapSignalDot"></span><strong id="mapSignal">Loading signal</strong></div>
+          <p id="mapAccess">Curated access information appears here.</p>
+          <div class="local-intel" id="localIntel"><span>LOCAL INTELLIGENCE</span><strong>Loading launch detail…</strong><small>Signals are calculated for this exact access point.</small></div>
+          <div class="hazard-card" id="hazardCard" hidden><span>KNOWN LOCAL HAZARD</span><strong id="hazardTitle">Local knowledge required</strong><small id="hazardCopy">Check the harbour authority and current notices before launching.</small><a id="hazardLink" href="#" target="_blank" rel="noreferrer">Official / specialist source ↗</a></div>
+          <div class="evidence-row"><span id="evidenceBadge">◌ RESEARCH LEAD</span><a id="evidenceLink" href="#" target="_blank" rel="noreferrer">View source ↗</a></div>
+          <div class="marine-readout" id="marineReadout"><span>SURF / CHARGER PULSE</span><strong>Loading coastal detail…</strong><small>Swell, current and tide-height guidance is modelled, not navigational.</small></div>
+          <div class="session-idea" id="sessionIdea"><span>SESSION IDEA</span><strong>No documented route loaded</strong><small>Choose a documented route or stay close to the launch.</small></div>
+          <div class="rnli-card" id="rnliCard"><span>RNLI COVER</span><strong id="rnliStatus">No patrol data verified</strong><small id="rnliDates">Always check for flags on arrival.</small><a id="rnliLink" href="https://rnli.org/find-my-nearest/lifeguarded-beaches" target="_blank" rel="noreferrer">Check RNLI →</a></div>
+          <button id="openSpotButton" type="button">Open full conditions <span>↓</span></button>
+        </aside>
+      </div>
+      <p class="map-note"><strong>UK and Ireland locations with visible evidence grades.</strong> Green describes conditions only after the selected sport is listed; it never guarantees access, depth, rescue cover or permission. Research leads are not recommendations.</p>
+    </section>
+
+    <section class="verdict-card amber" id="verdictCard" aria-live="polite">
+      <div class="verdict-main">
+        <div class="verdict-kicker"><span class="verdict-dot"></span><span id="verdictLabel">Take care</span><span class="time-label">Today · 10am–1pm</span></div>
+        <h1 id="verdictTitle">Not ideal for a beginner</h1>
+        <p id="verdictCopy">The wind will push you away from shore. Choose sheltered water or wait for it to ease.</p>
+        <div class="advice-line"><span class="advice-icon">↗</span><p id="adviceText"><strong>If you do launch:</strong> paddle west into the wind first, so it helps bring you home when you’re tired.</p></div>
+      </div>
+      <div class="condition-orb" aria-label="Wind 14 miles per hour, south westerly">
+        <span class="orb-arrow" id="windArrow">↗</span>
+        <strong id="windSpeed">14</strong>
+        <small>mph · <span id="windDir">SW</span></small>
+        <em id="gustText">gusts 21</em>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <div class="left-column">
+        <section class="hourly panel">
+          <div class="panel-heading"><div><span class="eyebrow">TODAY’S WINDOW</span><h2>Conditions through the day</h2></div><button class="plain-button" id="detailToggle">Hide detail ⌃</button></div>
+          <div class="wind-insights" id="windInsights"><div><span>QUIETEST</span><strong>Loading…</strong></div><div><span>STRONGEST</span><strong>Loading…</strong></div><div><span>BEST WINDOW</span><strong>Loading…</strong></div></div>
+          <div class="hour-strip" id="hourStrip"></div>
+          <div class="week-outlook"><div class="outlook-heading"><span class="eyebrow">NEXT 7 DAYS</span><strong>Tap a day to explore</strong></div><div class="outlook-strip" id="outlookStrip"></div><p id="forecastSource" class="forecast-source">Open-Meteo best-match model · daylight hours only</p></div>
+          <div class="detail-grid" id="detailGrid">
+            <div><span>Wind angle</span><strong id="angleDetail">Cross-offshore</strong></div>
+            <div><span>Wave height</span><strong>0.6 m</strong></div>
+            <div><span>High tide</span><strong>14:42</strong></div>
+          </div>
+        </section>
+
+        <section class="why panel">
+          <span class="eyebrow">WHY THIS VERDICT?</span>
+          <div class="reason-list" id="reasonList"></div>
+        </section>
+      </div>
+
+      <aside class="right-column">
+        <section class="alternative panel">
+          <div class="alt-top"><span class="eyebrow">A BETTER OPTION NEARBY</span><span class="safe-badge">● SHELTERED</span></div>
+          <h2 id="altName">Ardingly Reservoir</h2>
+          <p id="altMeta">19 miles away · 32 min drive</p>
+          <div class="alt-score"><span class="mini-orb">✓</span><div><strong>Good for beginners</strong><small>Sheltered from today’s SW wind</small></div></div>
+          <button class="route-button" id="routeButton">View this spot <span>→</span></button>
+        </section>
+
+        <section class="checklist panel">
+          <div class="panel-heading"><div><span class="eyebrow">BEFORE YOU LAUNCH</span><h2>Your safety check</h2></div><span class="progress" id="progress">0 / 4</span></div>
+          <div id="checklistItems"></div>
+          <div class="buddy-tip"><span>MATE’S TIP</span><p id="buddyTip">Stay close enough to shore that a swim would still be realistic—not merely possible.</p></div>
+          <p class="check-note" id="checkNote">Tick every item before you get on the water.</p>
+        </section>
+      </aside>
+    </section>
+
+    <p class="disclaimer"><strong>Guidance, not a guarantee.</strong> Forecast models can be wrong and conditions change quickly. Check local notices and observations at the water. Weather and marine data: <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a> (DWD and partner models). Modelled sea level is not suitable for navigation.</p>
+  </main>
+
+  <dialog id="setupDialog">
+    <form method="dialog" id="setupForm">
+      <div class="dialog-progress"><span class="active"></span><span></span><span></span></div>
+      <button class="close-dialog" value="cancel" aria-label="Close">×</button>
+      <span class="eyebrow">A 30-SECOND SETUP</span>
+      <h2>Make the forecast fit you</h2>
+      <p>We’ll translate the same weather differently depending on your experience and kit.</p>
+      <fieldset>
+        <legend>Your SUP experience</legend>
+        <div class="choice-grid skill-choices">
+          <label><input type="radio" name="skill_sup" value="beginner" checked><span><strong>Beginner</strong><small>Still building confidence</small></span></label>
+          <label><input type="radio" name="skill_sup" value="intermediate"><span><strong>Intermediate</strong><small>Comfortable in varied conditions</small></span></label>
+          <label><input type="radio" name="skill_sup" value="advanced"><span><strong>Advanced</strong><small>Experienced in wind and waves</small></span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Your wind-sports experience</legend>
+        <p class="field-help">Set each one separately — being an expert windsurfer does not make you an expert kiter.</p>
+        <div class="skill-matrix">
+          <label><span>Wing foil</span><select name="skill_wing"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Charger</option></select></label>
+          <label><span>Windsurf</span><select name="skill_windsurf"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Charger</option></select></label>
+          <label><span>Kitesurf</span><select name="skill_kite"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Charger</option></select></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Safety kit you own</legend>
+        <div class="kit-row"><label><input type="checkbox" name="leash"><span>Correct leash</span></label><label><input type="checkbox" name="pfd"><span>PFD / buoyancy aid</span></label><label><input type="checkbox" name="comms"><span>Waterproof phone / VHF</span></label></div>
+      </fieldset>
+      <fieldset>
+        <legend>Experience check</legend>
+        <div class="kit-row"><label><input type="checkbox" name="training"><span>Formal lesson or award</span></label><label><input type="checkbox" name="solo"><span>I normally go alone</span></label></div>
+      </fieldset>
+      <button class="save-setup" value="default">See my forecast <span>→</span></button>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="spots-extra.js"></script>
+  <script src="app-live.js"></script>
+</body>
+</html>
