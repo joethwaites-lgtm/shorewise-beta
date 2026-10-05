@@ -28,11 +28,11 @@
           </select>
         </div>
       </div>
-      <div class="segmented activity-picker" aria-label="What do you want to do?">
-        <button class="active" data-mode="paddle">SUP</button>
-        <button data-mode="wind">Wind sports</button>
+      <div class="segmented activity-picker" aria-label="Your free profile">
+        <button class="active" id="activeProfileButton" data-mode="paddle">SUP · Beginner</button>
       </div>
-      <div class="skill-chip"><span>Skill</span><button id="skillQuick" type="button">Beginner</button></div>
+      <button class="upgrade-chip" id="upgradeButton" type="button"><span>Premium</span> Add another sport</button>
+      <div class="skill-chip"><span>Your level</span><button id="skillQuick" type="button">Beginner</button></div>
     </section>
 
     <section class="map-explorer panel">
@@ -45,6 +45,7 @@
         <canvas id="windField" aria-hidden="true"></canvas>
         <div class="map-zoom" role="group" aria-label="Map zoom"><button id="mapZoomIn" type="button" aria-label="Zoom in">+</button><button id="mapZoomOut" type="button" aria-label="Zoom out">−</button></div>
         <div class="map-mode" role="group" aria-label="Map view"><button class="active" data-layer="roads">Roads</button><button data-layer="aerial">Aerial</button><button data-layer="terrain">Terrain</button></div>
+        <button class="map-fullscreen" id="mapFullscreen" type="button" aria-label="Open full-screen map">Full screen</button>
         <button class="map-info-toggle" id="mapInfoToggle" type="button" aria-expanded="false">Show spot card</button>
         <aside class="map-card" id="mapCard">
           <span class="map-type" id="mapType">COASTAL LAUNCH</span>
@@ -60,7 +61,7 @@
           <button id="openSpotButton" type="button">Open full conditions <span>↓</span></button>
         </aside>
       </div>
-      <p class="map-note"><strong>UK and Ireland locations with visible evidence grades.</strong> Green describes conditions only after the selected sport is listed; it never guarantees access, depth, rescue cover or permission. Research leads are not recommendations.</p>
+      <p class="map-note"><strong>Drag to move · pinch to zoom · use Full screen on a phone.</strong> Green describes conditions for your selected profile only; it never guarantees access, rescue cover or permission.</p>
     </section>
 
     <section class="verdict-card amber" id="verdictCard" aria-live="polite">
@@ -123,26 +124,27 @@
     <form method="dialog" id="setupForm">
       <div class="dialog-progress"><span class="active"></span><span></span><span></span></div>
       <button class="close-dialog" value="cancel" aria-label="Close">×</button>
-      <span class="eyebrow">A 30-SECOND SETUP</span>
-      <h2>Make the forecast fit you</h2>
-      <p>We’ll translate the same weather differently depending on your experience and kit.</p>
+      <span class="eyebrow">YOUR FREE PROFILE</span>
+      <h2>What are you getting on the water with?</h2>
+      <p>Pick one sport for the free forecast. We will only show advice that fits that sport and your experience.</p>
       <fieldset>
-        <legend>Your SUP experience</legend>
+        <legend>Choose your sport</legend>
+        <div class="choice-grid sport-choices">
+          <label><input type="radio" name="primary_sport" value="sup" checked><span><strong>SUP</strong><small>Flat water or surf</small></span></label>
+          <label><input type="radio" name="primary_sport" value="wing"><span><strong>Wingfoil</strong><small>Foil and wing</small></span></label>
+          <label><input type="radio" name="primary_sport" value="windsurf"><span><strong>Windsurf</strong><small>Learning or planing</small></span></label>
+          <label><input type="radio" name="primary_sport" value="kite"><span><strong>Kitesurf</strong><small>Documented kite spots</small></span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>How experienced are you?</legend>
         <div class="choice-grid skill-choices">
-          <label><input type="radio" name="skill_sup" value="beginner" checked><span><strong>Beginner</strong><small>Still building confidence</small></span></label>
-          <label><input type="radio" name="skill_sup" value="intermediate"><span><strong>Intermediate</strong><small>Comfortable in varied conditions</small></span></label>
-          <label><input type="radio" name="skill_sup" value="advanced"><span><strong>Advanced</strong><small>Experienced in wind and waves</small></span></label>
+          <label><input type="radio" name="profile_skill" value="beginner" checked><span><strong>Beginner</strong><small>I need clear boundaries</small></span></label>
+          <label><input type="radio" name="profile_skill" value="intermediate"><span><strong>Intermediate</strong><small>I can self-rescue</small></span></label>
+          <label><input type="radio" name="profile_skill" value="advanced"><span><strong>Charger</strong><small>I seek demanding conditions</small></span></label>
         </div>
       </fieldset>
-      <fieldset>
-        <legend>Your wind-sports experience</legend>
-        <p class="field-help">Set each one separately — being an expert windsurfer does not make you an expert kiter.</p>
-        <div class="skill-matrix">
-          <label><span>Wing foil</span><select name="skill_wing"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Charger</option></select></label>
-          <label><span>Windsurf</span><select name="skill_windsurf"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Charger</option></select></label>
-          <label><span>Kitesurf</span><select name="skill_kite"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Charger</option></select></label>
-        </div>
-      </fieldset>
+      <div class="premium-preview"><span>PREMIUM PREVIEW</span><strong>Use several sport profiles and compare the best session within your travel time.</strong><small>Payments are not live in this test version.</small></div>
       <fieldset>
         <legend>Safety kit you own</legend>
         <div class="kit-row"><label><input type="checkbox" name="leash"><span>Correct leash</span></label><label><input type="checkbox" name="pfd"><span>PFD / buoyancy aid</span></label><label><input type="checkbox" name="comms"><span>Waterproof phone / VHF</span></label></div>
