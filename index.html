@@ -146,7 +146,7 @@
       </fieldset>
       <fieldset class="home-area-field">
         <legend>Your free home area</legend>
-        <label class="location-input"><span>Postcode, Eircode or nearest town</span><input id="homeAreaInput" name="home_area" type="text" autocomplete="postal-code" placeholder="e.g. NE30 4NT or Galway" required><small>Free shows suitable launches within roughly 35 miles. We use this only to centre and filter your map on this device.</small></label>
+        <label class="location-input"><span>Postcode, Eircode or nearest town</span><input id="homeAreaInput" name="home_area" type="text" autocomplete="postal-code" placeholder="e.g. NE30 4NT or Galway" required><small>Free shows suitable launches within about 60 minutes by road, where routing is available. Your area and profile stay on this device in this demo.</small></label>
         <p class="location-error" id="homeAreaError" role="alert" hidden>We could not find that area. Try a full postcode or a nearby town.</p>
       </fieldset>
       <div class="premium-preview"><span>PREMIUM PREVIEW</span><strong>Travel anywhere, keep several sport profiles and compare the best session within your drive time.</strong><small>Payments are not live in this test version.</small></div>
@@ -159,7 +159,14 @@
         <div class="kit-row sport-checks" id="sportCapability"></div>
         <label class="qualification-select"><span>Training or award (self-declared)</span><select id="qualificationSelect" name="qualification"></select><small>This helps tailor the wording; Shorewise does not verify certificates.</small></label>
       </fieldset>
-      <button class="save-setup" value="default">See my forecast <span>→</span></button>
+      <fieldset class="safety-ack">
+        <legend>Your safety acknowledgement</legend>
+        <p><strong>Shorewise is planning guidance—not live safety, navigation or rescue advice.</strong> Forecasts, access and conditions can be wrong or change quickly.</p>
+        <label class="ack-check"><input id="safetyAccept" name="safety_accept" type="checkbox" required><span>I will check the actual weather, water, tide/current, access rules and official warnings before launching. My profile is accurate, and the launch/no-launch decision remains mine.</span></label>
+        <label class="initials-input"><span>Type your initials to acknowledge</span><input id="ackInitials" name="ack_initials" type="text" minlength="2" maxlength="8" autocomplete="off" required placeholder="e.g. JT"></label>
+        <small>Demo terms v1 · Acceptance is stored on this device. This does not remove any legal rights or exclude liability that cannot lawfully be excluded.</small>
+      </fieldset>
+      <button class="save-setup" value="default">Accept and see my forecast <span>→</span></button>
     </form>
   </dialog>
   <div class="toast" id="toast" role="status"></div>
