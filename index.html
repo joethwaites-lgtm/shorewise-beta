@@ -144,14 +144,20 @@
           <label><input type="radio" name="profile_skill" value="advanced"><span><strong>Charger</strong><small>I seek demanding conditions</small></span></label>
         </div>
       </fieldset>
-      <div class="premium-preview"><span>PREMIUM PREVIEW</span><strong>Use several sport profiles and compare the best session within your travel time.</strong><small>Payments are not live in this test version.</small></div>
+      <fieldset class="home-area-field">
+        <legend>Your free home area</legend>
+        <label class="location-input"><span>Postcode, Eircode or nearest town</span><input id="homeAreaInput" name="home_area" type="text" autocomplete="postal-code" placeholder="e.g. NE30 4NT or Galway" required><small>Free shows suitable launches within roughly 35 miles. We use this only to centre and filter your map on this device.</small></label>
+        <p class="location-error" id="homeAreaError" role="alert" hidden>We could not find that area. Try a full postcode or a nearby town.</p>
+      </fieldset>
+      <div class="premium-preview"><span>PREMIUM PREVIEW</span><strong>Travel anywhere, keep several sport profiles and compare the best session within your drive time.</strong><small>Payments are not live in this test version.</small></div>
       <fieldset>
-        <legend>Safety kit you own</legend>
-        <div class="kit-row"><label><input type="checkbox" name="leash"><span>Correct leash</span></label><label><input type="checkbox" name="pfd"><span>PFD / buoyancy aid</span></label><label><input type="checkbox" name="comms"><span>Waterproof phone / VHF</span></label></div>
+        <legend>Kit and safer habits for this sport</legend>
+        <div class="kit-row sport-checks" id="sportKit"></div>
       </fieldset>
       <fieldset>
-        <legend>Experience check</legend>
-        <div class="kit-row"><label><input type="checkbox" name="training"><span>Formal lesson or award</span></label><label><input type="checkbox" name="solo"><span>I normally go alone</span></label></div>
+        <legend>What can you genuinely do?</legend>
+        <div class="kit-row sport-checks" id="sportCapability"></div>
+        <label class="qualification-select"><span>Training or award (self-declared)</span><select id="qualificationSelect" name="qualification"></select><small>This helps tailor the wording; Shorewise does not verify certificates.</small></label>
       </fieldset>
       <button class="save-setup" value="default">See my forecast <span>→</span></button>
     </form>
@@ -162,5 +168,3 @@
   <script src="app-live.js"></script>
 </body>
 </html>
-
-<!-- Shorewise redeploy 2026-10-06 -->
