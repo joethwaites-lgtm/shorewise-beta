@@ -7,7 +7,7 @@
   <meta name="description" content="Plain-English watersports conditions and safety guidance for UK paddleboarders and wind sports.">
   <title>Shorewise — Know before you launch</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23071b26'/%3E%3Cpath d='M10 36c8-12 16 12 24 0s16 12 22 0' fill='none' stroke='%2344d6b7' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M10 23h29' stroke='%23f4c95d' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='m35 15 9 8-9 8' fill='none' stroke='%23f4c95d' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=7.0">
+  <link rel="stylesheet" href="styles.css?v=8.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
 <body>
@@ -32,6 +32,7 @@
         <button class="active" id="activeProfileButton" data-mode="paddle">SUP · Beginner</button>
       </div>
       <button class="upgrade-chip" id="upgradeButton" type="button"><span>Premium</span> Add another sport</button>
+      <button class="plan-chip" id="planSwitchButton" type="button"><span id="planBadge">FREE DEMO</span> Switch version</button>
       <div class="skill-chip"><span>Your level</span><button id="skillQuick" type="button">Beginner</button></div>
     </section>
 
@@ -67,6 +68,10 @@
     <section class="demo-commercial" aria-label="Free version preview">
       <div class="sponsor-banner"><span>FREE VERSION · SAMPLE SPONSOR</span><strong id="sponsorHeadline">Kit chosen for today’s SUP profile</strong><small>One restrained, sport-matched placement. Never mixed into the safety verdict.</small><button type="button" id="sponsorInfo">How ads would work</button></div>
       <div class="instructor-spotlight"><span>LOCAL INSTRUCTOR SPOTLIGHT</span><strong>Find qualified help near the selected water</strong><small>Demo directory placement — credentials and current operating area would be checked before listing.</small><button type="button" id="instructorButton">Find an instructor →</button></div>
+    </section>
+    <section class="premium-planner" aria-label="Premium trip planner preview">
+      <div><span>PREMIUM · TWO-HOUR SEARCH</span><strong id="premiumPlannerTitle">Find the strongest session across all your sports</strong><small>Compare SUP, SUP surf, wing, windsurf and kite opportunities against drive time, daylight and documented launch evidence.</small></div>
+      <button type="button" id="premiumPlannerButton">Plan this weekend →</button>
     </section>
 
     <section class="verdict-card amber" id="verdictCard" aria-live="polite">
@@ -132,6 +137,27 @@
     <p class="disclaimer"><strong>Planning guidance, never a declaration that water is safe.</strong> Green means “a better fit for the profile and evidence currently loaded”—not permission to launch. Forecasts, access, flags, water quality and local conditions can change. Check the water and official notices yourself. Weather and marine data: <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a>. Modelled sea level is not suitable for navigation.</p>
   </main>
 
+  <dialog id="planDialog" class="plan-dialog">
+    <div class="plan-shell">
+      <span class="eyebrow">SHOREWISE DEMO</span>
+      <h2>How do you want to explore?</h2>
+      <p>Walk through either version. Payments are not connected—this is a product demonstration.</p>
+      <div class="plan-grid">
+        <button type="button" class="plan-option free" data-plan="free">
+          <span>FREE</span><strong>What can I do locally?</strong>
+          <small>One SUP-beginner profile · about 60 minutes from home · sponsor and instructor placements · core forecast and safety guidance</small>
+          <em>Try free →</em>
+        </button>
+        <button type="button" class="plan-option premium" data-plan="premium">
+          <span>PREMIUM PREVIEW</span><strong>Where is the best session?</strong>
+          <small>Multiple sport profiles · two-hour travel search · weekend planning · no display ads · richer hazards and water-status layers</small>
+          <em>Try premium →</em>
+        </button>
+      </div>
+      <p class="plan-footnote">Neither version declares water safe. Forecasts and community information always require an on-arrival assessment.</p>
+    </div>
+  </dialog>
+
   <dialog id="setupDialog">
     <form method="dialog" id="setupForm">
       <div class="dialog-progress"><span class="active"></span><span></span><span></span></div>
@@ -184,6 +210,6 @@
   <div class="toast" id="toast" role="status"></div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="spots-extra.js"></script>
-  <script src="app-live.js?v=7.0"></script>
+  <script src="app-live.js?v=8.0"></script>
 </body>
 </html>
