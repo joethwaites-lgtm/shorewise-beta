@@ -28,7 +28,7 @@
           </select>
         </div>
       </div>
-      <div class="segmented activity-picker" aria-label="Your free profile">
+      <div class="segmented activity-picker" aria-label="Your sport profiles">
         <button class="active" id="activeProfileButton" data-mode="paddle">SUP · Beginner</button>
       </div>
       <button class="upgrade-chip" id="upgradeButton" type="button"><span>Premium</span> Add another sport</button>
@@ -183,8 +183,8 @@
         </div>
       </fieldset>
       <fieldset class="home-area-field">
-        <legend>Your free home area</legend>
-        <label class="location-input"><span>Postcode, Eircode or nearest town</span><input id="homeAreaInput" name="home_area" type="text" autocomplete="postal-code" placeholder="e.g. NE30 4NT or Galway" required><small>Free shows suitable launches within about 60 minutes by road, where routing is available. Your area and profile stay on this device in this demo.</small></label>
+        <legend id="homeAreaLegend">Your home area</legend>
+        <label class="location-input"><span>Postcode, Eircode or nearest town</span><input id="homeAreaInput" name="home_area" type="text" autocomplete="postal-code" placeholder="e.g. NE30 4NT or Galway" required><small id="homeAreaHelp">Your area and profile stay on this device in this demo.</small></label>
         <p class="location-error" id="homeAreaError" role="alert" hidden>We could not find that area. Try a full postcode or a nearby town.</p>
       </fieldset>
       <div class="premium-preview"><span>PREMIUM PREVIEW</span><strong>Travel anywhere, keep several sport profiles and compare the best session within your drive time.</strong><small>Payments are not live in this test version.</small></div>
