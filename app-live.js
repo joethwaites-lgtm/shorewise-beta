@@ -180,6 +180,7 @@ words=function(level){let s=spots[state.spot],d=state.live;if(state.sport==='sup
 
 $('#sponsorInfo').onclick=()=>toast('Demo only: one clearly labelled, sport-matched placement. Sponsors never affect verdicts or rankings.');
 $('#instructorButton').onclick=()=>toast('Instructor directory preview: Paddle UK, RYA, BSUPA or BKSA credentials would be verified before listing.');
+let initialSponsor=$('#sponsorHeadline');if(initialSponsor)initialSponsor.textContent={sup:'Paddle kit matched to today’s SUP profile',wing:'Wing and foil kit matched to today’s wind range',windsurf:'Sails and boards matched to today’s wind range',kite:'Kite kit matched to today’s documented launch'}[state.sport]||'Relevant kit for today’s profile';
 if(state.spot){render();mapCard(state.spot,spots[state.spot]._signal||'grey')}
 
 
