@@ -40,3 +40,19 @@
 .home-area-field{background:#f7faf8;border-radius:12px;padding:12px 14px!important}.location-input,.qualification-select{display:grid;gap:6px}.location-input>span,.qualification-select>span{font-size:.76rem;font-weight:850;color:var(--ink)}.location-input input,.qualification-select select{width:100%;box-sizing:border-box;border:1px solid #bdccc7;border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-size:.86rem;padding:10px 11px}.location-input small,.qualification-select small{font-size:.68rem;line-height:1.4;color:var(--muted)}.location-error{margin:7px 0 0;color:#a23d32;font-size:.72rem;font-weight:750}.sport-checks{grid-template-columns:1fr 1fr}.sport-checks label span{line-height:1.3}.setup-busy .save-setup{opacity:.65;pointer-events:none}
 .safety-ack{margin-top:20px;padding:14px!important;border:1px solid #d8c98e;border-radius:12px;background:#fff9e8}.safety-ack p{font-size:.74rem;line-height:1.45;margin:0 0 10px;color:#4f4730}.safety-ack>small{display:block;margin-top:9px;font-size:.64rem;line-height:1.4;color:#746c54}.ack-check{display:flex;align-items:flex-start;gap:9px;font-size:.72rem;line-height:1.42;font-weight:650;cursor:pointer}.ack-check input{margin-top:3px;accent-color:var(--teal)}.initials-input{display:grid;grid-template-columns:1fr 92px;align-items:center;gap:10px;margin-top:11px;font-size:.7rem;font-weight:800}.initials-input input{width:100%;border:1px solid #c7b979;border-radius:8px;padding:8px 9px;text-transform:uppercase;font:inherit;background:#fff}.routing-note{font-size:.67rem;color:var(--teal);font-weight:750;margin:7px 0 0}
 @media(max-width:620px){.sport-checks{grid-template-columns:1fr}.home-area-field{padding:10px!important}}
+
+/* V9: the plan choice is the front door; controls stay deliberately simple. */
+.activity-picker,.skill-chip,.upgrade-chip{display:none!important}
+.controls{grid-template-columns:minmax(260px,1fr) auto;align-items:end}
+.plan-dialog{border:0;box-shadow:0 30px 100px rgba(4,25,35,.42)}
+.plan-dialog::backdrop{background:rgba(6,25,34,.72);backdrop-filter:blur(9px)}
+.ad-leaderboard.demo-commercial{width:min(970px,100%);min-height:90px;margin:18px auto 16px;padding:13px 24px;border:2px dashed #76aa9d;border-radius:12px;background:linear-gradient(105deg,#e0f5ee,#f8fbf9);display:flex;align-items:center;justify-content:center;gap:18px;text-align:center;color:var(--ink)}
+.ad-leaderboard span,.ad-rail span{font-size:.58rem;letter-spacing:.13em;font-weight:900;color:var(--teal)}
+.ad-leaderboard strong{font-size:1rem;letter-spacing:.06em}.ad-leaderboard small,.ad-rail small{font-size:.67rem;color:var(--muted)}
+.ad-rail.demo-commercial{min-height:250px;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;text-align:center;border:2px dashed #79a99e;border-radius:16px;background:linear-gradient(145deg,#e6f4f0,#fff)}
+.ad-rail strong{font-family:Georgia,serif;font-size:1.35rem;line-height:1.15}
+.plan-premium .ad-leaderboard,.plan-premium .ad-rail{display:none!important}
+.plan-premium .premium-planner span:after{content:' · NATIONAL MAP'}
+
+@media(max-width:760px){.controls{grid-template-columns:1fr auto}.plan-chip{order:initial;width:auto}.ad-leaderboard.demo-commercial{min-height:100px;margin:10px auto 12px;padding:12px;display:grid;gap:4px}.ad-leaderboard span{font-size:.52rem}.ad-leaderboard strong{font-size:.82rem}.ad-rail.demo-commercial{min-height:100px}.right-column .ad-rail{display:flex}.plan-shell{padding:30px 20px}}
+@media(max-width:480px){.controls{grid-template-columns:1fr}.plan-chip{width:100%}.plan-option{min-height:195px}.plan-dialog h2{font-size:2rem}}
