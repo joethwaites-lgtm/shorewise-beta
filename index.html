@@ -7,7 +7,7 @@
   <meta name="description" content="Plain-English watersports conditions and safety guidance for UK paddleboarders and wind sports.">
   <title>Shorewise — Know before you launch</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23071b26'/%3E%3Cpath d='M10 36c8-12 16 12 24 0s16 12 22 0' fill='none' stroke='%2344d6b7' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M10 23h29' stroke='%23f4c95d' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='m35 15 9 8-9 8' fill='none' stroke='%23f4c95d' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=9.0">
+  <link rel="stylesheet" href="styles.css?v=9.1">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
 <body>
@@ -75,7 +75,7 @@
       <div class="instructor-spotlight"><span>LOCAL INSTRUCTOR SPOTLIGHT</span><strong>Find qualified help near the selected water</strong><small>Demo directory placement — credentials and current operating area would be checked before listing.</small><button type="button" id="instructorButton">Find an instructor →</button></div>
     </section>
     <section class="premium-planner" aria-label="Premium trip planner preview">
-      <div><span>PREMIUM · TWO-HOUR SEARCH</span><strong id="premiumPlannerTitle">Find the strongest session across all your sports</strong><small>Compare SUP, SUP surf, wing, windsurf and kite opportunities against drive time, daylight and documented launch evidence.</small></div>
+      <div><span>PREMIUM · NATIONAL EXPLORER</span><strong id="premiumPlannerTitle">Find the strongest session across all your sports</strong><small>Browse anywhere, then build a practical three-hour weekend shortlist using daylight, conditions and documented launch evidence.</small></div>
       <button type="button" id="premiumPlannerButton">Plan this weekend →</button>
     </section>
 
@@ -197,6 +197,15 @@
         <label class="location-input"><span>Postcode, Eircode or nearest town</span><input id="homeAreaInput" name="home_area" type="text" autocomplete="postal-code" placeholder="e.g. NE30 4NT or Galway" required><small id="homeAreaHelp">Your area and profile stay on this device in this demo.</small></label>
         <p class="location-error" id="homeAreaError" role="alert" hidden>We could not find that area. Try a full postcode or a nearby town.</p>
       </fieldset>
+      <fieldset class="account-preview">
+        <legend>Create or access your Shorewise profile</legend>
+        <p>Sign-in is mocked for this demo; no external account is created.</p>
+        <div class="account-methods">
+          <label><input type="radio" name="account_method" value="google" required><span>G&nbsp; Continue with Google</span></label>
+          <label><input type="radio" name="account_method" value="apple" required><span>●&nbsp; Continue with Apple</span></label>
+          <label><input type="radio" name="account_method" value="email" required><span>✉&nbsp; Use email and password</span></label>
+        </div>
+      </fieldset>
       <div class="premium-preview"><span>PREMIUM PREVIEW</span><strong>Travel anywhere, keep several sport profiles and compare the best session within your drive time.</strong><small>Payments are not live in this test version.</small></div>
       <fieldset>
         <legend>Kit and safer habits for this sport</legend>
@@ -220,6 +229,6 @@
   <div class="toast" id="toast" role="status"></div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="spots-extra.js"></script>
-  <script src="app-live.js?v=9.0"></script>
+  <script src="app-live.js?v=9.1"></script>
 </body>
 </html>
