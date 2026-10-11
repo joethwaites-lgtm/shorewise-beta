@@ -64,6 +64,11 @@
       <p class="map-note"><strong>Drag to move · pinch to zoom · use Full screen on a phone.</strong> Green describes conditions for your selected profile only; it never guarantees access, rescue cover or permission.</p>
     </section>
 
+    <section class="demo-commercial" aria-label="Free version preview">
+      <div class="sponsor-banner"><span>FREE VERSION · SAMPLE SPONSOR</span><strong id="sponsorHeadline">Kit chosen for today’s SUP profile</strong><small>One restrained, sport-matched placement. Never mixed into the safety verdict.</small><button type="button" id="sponsorInfo">How ads would work</button></div>
+      <div class="instructor-spotlight"><span>LOCAL INSTRUCTOR SPOTLIGHT</span><strong>Find qualified help near the selected water</strong><small>Demo directory placement — credentials and current operating area would be checked before listing.</small><button type="button" id="instructorButton">Find an instructor →</button></div>
+    </section>
+
     <section class="verdict-card amber" id="verdictCard" aria-live="polite">
       <div class="verdict-main">
         <div class="verdict-kicker"><span class="verdict-dot"></span><span id="verdictLabel">Take care</span><span class="time-label">Today · 10am–1pm</span></div>
@@ -114,10 +119,17 @@
           <div class="buddy-tip"><span>MATE’S TIP</span><p id="buddyTip">Stay close enough to shore that a swim would still be realistic—not merely possible.</p></div>
           <p class="check-note" id="checkNote">Tick every item before you get on the water.</p>
         </section>
+
+        <section class="water-status panel" id="waterStatusCard">
+          <span class="eyebrow">WATER STATUS</span>
+          <h2 id="waterStatusTitle">Official checks before launch</h2>
+          <p id="waterStatusCopy">Live pollution and river-level coverage varies by nation and site. Shorewise will say when a verified feed is unavailable rather than invent a green light.</p>
+          <div class="water-links" id="waterStatusLinks"></div>
+        </section>
       </aside>
     </section>
 
-    <p class="disclaimer"><strong>Guidance, not a guarantee.</strong> Forecast models can be wrong and conditions change quickly. Check local notices and observations at the water. Weather and marine data: <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a> (DWD and partner models). Modelled sea level is not suitable for navigation.</p>
+    <p class="disclaimer"><strong>Planning guidance, never a declaration that water is safe.</strong> Green means “a better fit for the profile and evidence currently loaded”—not permission to launch. Forecasts, access, flags, water quality and local conditions can change. Check the water and official notices yourself. Weather and marine data: <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a>. Modelled sea level is not suitable for navigation.</p>
   </main>
 
   <dialog id="setupDialog">
