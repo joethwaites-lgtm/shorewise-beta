@@ -7,7 +7,7 @@
   <meta name="description" content="Plain-English watersports conditions and safety guidance for UK paddleboarders and wind sports.">
   <title>Shorewise — Know before you launch</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23071b26'/%3E%3Cpath d='M10 36c8-12 16 12 24 0s16 12 22 0' fill='none' stroke='%2344d6b7' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M10 23h29' stroke='%23f4c95d' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='m35 15 9 8-9 8' fill='none' stroke='%23f4c95d' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=9.1">
+  <link rel="stylesheet" href="styles.css?v=10.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
 <body>
@@ -75,8 +75,15 @@
       <div class="instructor-spotlight"><span>LOCAL INSTRUCTOR SPOTLIGHT</span><strong>Find qualified help near the selected water</strong><small>Demo directory placement — credentials and current operating area would be checked before listing.</small><button type="button" id="instructorButton">Find an instructor →</button></div>
     </section>
     <section class="premium-planner" aria-label="Premium trip planner preview">
-      <div><span>PREMIUM · NATIONAL EXPLORER</span><strong id="premiumPlannerTitle">Find the strongest session across all your sports</strong><small>Browse anywhere, then build a practical three-hour weekend shortlist using daylight, conditions and documented launch evidence.</small></div>
-      <button type="button" id="premiumPlannerButton">Plan this weekend →</button>
+      <div><span>PREMIUM · NATIONAL EXPLORER</span><strong id="premiumPlannerTitle">What is the best use of your kit?</strong><small>Choose a sport, then compare the strongest documented match nationally or within a realistic three-hour weekend drive.</small></div>
+      <div class="premium-sport-planner" aria-label="Sport to rank">
+        <button type="button" data-planner-sport="sup" data-sup-use="surf">SUP surf</button>
+        <button type="button" data-planner-sport="sup" data-sup-use="touring">Flat-water SUP</button>
+        <button type="button" data-planner-sport="wing">Wing foil</button>
+        <button type="button" data-planner-sport="windsurf">Windsurf</button>
+        <button type="button" data-planner-sport="kite">Kitesurf</button>
+      </div>
+      <div class="premium-scope-actions"><button type="button" id="premiumLocalButton">Best within 3 hours</button><button type="button" id="premiumPlannerButton">Best nationally</button></div>
     </section>
 
     <section class="verdict-card amber" id="verdictCard" aria-live="polite">
@@ -142,6 +149,13 @@
           <div class="water-links" id="waterStatusLinks"></div>
         </section>
       </aside>
+    </section>
+
+    <section class="free-marketplace demo-commercial" aria-label="Free version partners and training">
+      <article class="lesson-feature"><span>GET BETTER · GET SAFER</span><strong>Book a qualified local instructor</strong><small>Find verified Paddle UK, BSUPA, RYA and BKSA teaching near the selected water.</small><button type="button" id="lessonFeatureButton">Find a lesson →</button></article>
+      <article class="ad-tile"><span>ADVERTISEMENT · 300 × 250</span><strong>COURSES &amp; COACHING</strong><small>Regional, sport-specific campaign</small></article>
+      <article class="ad-tile"><span>ADVERTISEMENT · 300 × 250</span><strong>BOARDS • WINGS • WETSUITS</strong><small>Equipment partner placement</small></article>
+      <article class="partner-links"><span>USEFUL ORGANISATIONS</span><strong>Training, clubs and water-safety partners</strong><small>Curated links stay visually separate from paid advertising.</small></article>
     </section>
 
     <p class="disclaimer"><strong>Planning guidance, never a declaration that water is safe.</strong> Green means “a better fit for the profile and evidence currently loaded”—not permission to launch. Forecasts, access, flags, water quality and local conditions can change. Check the water and official notices yourself. Weather and marine data: <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a>. Modelled sea level is not suitable for navigation.</p>
@@ -229,6 +243,6 @@
   <div class="toast" id="toast" role="status"></div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="spots-extra.js"></script>
-  <script src="app-live.js?v=9.2"></script>
+  <script src="app-live.js?v=10.0"></script>
 </body>
 </html>
