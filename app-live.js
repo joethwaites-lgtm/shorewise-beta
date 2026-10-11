@@ -147,7 +147,7 @@ let fullMap=false;function setFullMap(on){fullMap=on;let stage=$('.map-stage'),b
 $('#mapFullscreen').onclick=()=>setFullMap(!fullMap);document.addEventListener('keydown',event=>{if(event.key==='Escape'&&fullMap)setFullMap(false)});
 
 updateProfileUI();
-if(!hasSetup&&localStorage.getItem('shorewise-plan-v1'))setTimeout(()=>openSetup(true),120);
+// The plan chooser is always the first interaction; setup opens only after a plan is chosen.
 
 // V7 evidence and commercial-preview layer. Safety verdicts remain independent from sponsorship.
 const v7MapCard=mapCard;
