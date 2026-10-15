@@ -85,7 +85,7 @@
         <label class="planner-level"><span>Rider level</span><select id="premiumPlannerSkill"><option value="beginner">Beginner</option><option value="intermediate" selected>Intermediate</option><option value="advanced">Advanced / charger</option></select></label>
       </div>
       <div class="premium-scope-actions"><button type="button" data-scope="local" id="premiumLocalButton">Best nearby · 60 min</button><button type="button" data-scope="mission" id="premiumMissionButton">Best day trip · 3 hours</button><button type="button" data-scope="national" id="premiumPlannerButton">Best national mission</button></div>
-      <div class="premium-profile-bar" id="premiumProfileBar"><span>SWAP SPORT</span><div id="premiumProfileButtons"></div><button type="button" id="addPremiumProfile">＋ Add profile</button></div>
+      <div class="premium-profile-bar" id="premiumProfileBar"><span>SWAP SPORT</span><div id="premiumProfileButtons"></div><button type="button" id="addPremiumProfile">＋ Edit profiles</button></div>
       <div class="planner-result" id="plannerResult" hidden></div>
     </section>
 
@@ -250,7 +250,8 @@
         <label class="initials-input"><span>Type your initials to acknowledge</span><input id="ackInitials" name="ack_initials" type="text" minlength="2" maxlength="8" autocomplete="off" required placeholder="e.g. JT"></label>
         <small>Demo terms v1 · Acceptance is stored on this device. This does not remove any legal rights or exclude liability that cannot lawfully be excluded.</small>
       </fieldset>
-      <button class="save-setup" value="default">Accept and see my forecast <span>→</span></button>
+      <button class="save-setup" id="saveProfileButton" value="default">Accept and see my forecast <span>→</span></button>
+      <button class="finish-profiles" id="finishProfiles" type="button" hidden>Done — show my forecasts</button>
     </form>
   </dialog>
   <div class="community-actions"><button type="button" class="knowledge-fab" id="knowledgeButton"><span>＋</span> Add a local spot</button><button type="button" class="hazard-fab" id="hazardButton">Report a current hazard</button></div>
@@ -275,6 +276,6 @@
   <div class="toast" id="toast" role="status"></div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="spots-extra.js"></script>
-  <script src="app-live.js?v=14.1"></script>
+  <script src="app-live.js?v=15"></script>
 </body>
 </html>
