@@ -44,7 +44,7 @@
     <section class="map-explorer panel">
       <div class="map-toolbar">
         <div><span class="eyebrow">EXPLORE THE UK</span><h1>Find water that fits today</h1></div>
-        <div class="map-actions"><button id="rnliFilterButton" type="button">Nearest RNLI beach</button><div class="map-legend"><span><i class="green"></i> Good</span><span><i class="amber"></i> Caution</span><span><i class="red"></i> Avoid</span><span><i class="grey"></i> Loading</span></div></div>
+        <div class="map-actions"><button id="rnliFilterButton" type="button">Nearest RNLI beach</button><div class="map-legend"><span><i class="green"></i> Good</span><span><i class="amber"></i> Caution</span><span><i class="red"></i> Avoid</span><span><i class="grey"></i> Not yet checked</span></div></div>
       </div>
       <div class="map-stage card-hidden">
         <div id="map" aria-label="Interactive map of curated UK watersports locations"></div>
@@ -75,8 +75,8 @@
       <div class="instructor-spotlight"><span>LOCAL INSTRUCTOR SPOTLIGHT</span><strong>Find qualified help near the selected water</strong><small>Demo directory placement — credentials and current operating area would be checked before listing.</small><button type="button" id="instructorButton">Find an instructor →</button></div>
     </section>
     <section class="premium-planner" aria-label="Premium trip planner preview">
-      <div><span>PREMIUM · NATIONAL EXPLORER</span><strong id="premiumPlannerTitle">What is the best use of your kit?</strong><small>Choose a sport, then compare the strongest documented match nationally or within a realistic three-hour weekend drive.</small></div>
-      <div class="premium-sport-planner" aria-label="Sport to rank">
+      <div><span>PREMIUM · SESSION FINDER</span><strong id="premiumPlannerTitle">Where is the best session for this profile?</strong><small>Swap profile, choose how far you will travel, then see one ranked winner and the strongest alternatives.</small></div>
+      <div class="premium-sport-planner legacy-planner-controls" aria-label="Sport to rank" hidden>
         <button type="button" data-planner-sport="sup" data-sup-use="surf">SUP surf</button>
         <button type="button" data-planner-sport="sup" data-sup-use="touring">Flat-water SUP</button>
         <button type="button" data-planner-sport="wing">Wing foil</button>
@@ -85,7 +85,7 @@
         <label class="planner-level"><span>Rider level</span><select id="premiumPlannerSkill"><option value="beginner">Beginner</option><option value="intermediate" selected>Intermediate</option><option value="advanced">Advanced / charger</option></select></label>
       </div>
       <div class="premium-scope-actions"><button type="button" data-scope="local" id="premiumLocalButton">Best nearby · 60 min</button><button type="button" data-scope="mission" id="premiumMissionButton">Best day trip · 3 hours</button><button type="button" data-scope="national" id="premiumPlannerButton">Best national mission</button></div>
-      <div class="premium-profile-bar" id="premiumProfileBar"><span>MY KIT BAG</span><div id="premiumProfileButtons"></div><button type="button" id="addPremiumProfile">＋ Add profile</button></div>
+      <div class="premium-profile-bar" id="premiumProfileBar"><span>SWAP SPORT</span><div id="premiumProfileButtons"></div><button type="button" id="addPremiumProfile">＋ Add profile</button></div>
       <div class="planner-result" id="plannerResult" hidden></div>
     </section>
 
@@ -213,6 +213,8 @@
         <div class="choice-grid sup-use-choices">
           <label><input type="radio" name="sup_discipline" value="touring" checked required><span><strong>Flat water / touring</strong><small>Sheltered water and coastal cruising</small></span></label>
           <label><input type="radio" name="sup_discipline" value="surf" required><span><strong>SUP surfing</strong><small>Working within a breaking-wave zone</small></span></label>
+          <label><input type="radio" name="sup_discipline" value="mixed" required><span><strong>Mixed SUP</strong><small>Show surf or touring when either genuinely works</small></span></label>
+          <label><input type="radio" name="sup_discipline" value="whitewater" required><span><strong>White water</strong><small>Documented moving-water venues only</small></span></label>
           <label><input type="radio" name="board_type" value="inflatable" checked required><span><strong>Inflatable</strong><small>More windage; conservative offshore rules</small></span></label>
           <label><input type="radio" name="board_type" value="hard" required><span><strong>Hard board</strong><small>Lower windage; surf-specific assessment</small></span></label>
         </div>
@@ -251,7 +253,7 @@
       <button class="save-setup" value="default">Accept and see my forecast <span>→</span></button>
     </form>
   </dialog>
-  <div class="community-actions"><button type="button" class="knowledge-fab" id="knowledgeButton"><span>＋</span> Add a local spot</button><button type="button" class="hazard-fab" id="hazardButton"><span>!</span> Report a current hazard</button></div>
+  <div class="community-actions"><button type="button" class="knowledge-fab" id="knowledgeButton"><span>＋</span> Add a local spot</button><button type="button" class="hazard-fab" id="hazardButton">Report a current hazard</button></div>
   <dialog id="knowledgeDialog" class="knowledge-dialog">
     <form id="knowledgeForm">
       <button type="button" class="close-dialog" id="knowledgeClose" aria-label="Close">×</button>
@@ -273,6 +275,6 @@
   <div class="toast" id="toast" role="status"></div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="spots-extra.js"></script>
-  <script src="app-live.js?v=13.0"></script>
+  <script src="app-live.js?v=14.0"></script>
 </body>
 </html>
