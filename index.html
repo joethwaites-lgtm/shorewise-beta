@@ -136,6 +136,7 @@
           <p id="altMeta">19 miles away · 32 min drive</p>
           <div class="alt-score"><span class="mini-orb">✓</span><div><strong>Good for beginners</strong><small>Sheltered from today’s SW wind</small></div></div>
           <button class="route-button" id="routeButton">View this spot <span>→</span></button>
+          <div class="session-plan-b" id="sessionPlanB" hidden><span>FLAT-WATER PLAN B · NOT A SURF RESULT</span><strong id="planBName"></strong><small id="planBMeta"></small><button type="button" id="planBButton">View Plan B →</button></div>
         </section>
 
         <section class="checklist panel">
@@ -248,9 +249,28 @@
       <button class="save-setup" value="default">Accept and see my forecast <span>→</span></button>
     </form>
   </dialog>
+  <button type="button" class="knowledge-fab" id="knowledgeButton"><span>＋</span> Add local knowledge</button>
+  <dialog id="knowledgeDialog" class="knowledge-dialog">
+    <form id="knowledgeForm">
+      <button type="button" class="close-dialog" id="knowledgeClose" aria-label="Close">×</button>
+      <span class="eyebrow">COMMUNITY INTELLIGENCE</span><h2>Add a spot or flag a problem</h2>
+      <p>Tell us what has changed locally. Nothing appears on the public map until it has been reviewed.</p>
+      <fieldset class="knowledge-kind"><legend>What are you reporting?</legend><label><input type="radio" name="report_type" value="location" checked><span>Add or improve a location</span></label><label><input type="radio" name="report_type" value="alert"><span>Hazard or water-quality alert</span></label></fieldset>
+      <div class="knowledge-grid">
+        <label><span>Place or stretch of water</span><input name="place" required placeholder="e.g. Ladyburn Lake"></label>
+        <label><span>Your connection</span><select name="role" required><option value="">Choose one</option><option>Local paddler / rider</option><option>Qualified instructor or coach</option><option>Club or venue operator</option><option>Visitor</option></select></label>
+        <label class="wide"><span>What should people know?</span><textarea name="detail" required rows="4" placeholder="Best conditions, algae, sewage, obstruction, access change, launch or exit…"></textarea></label>
+        <label><span>Wind, tide or timing</span><input name="conditions" placeholder="e.g. works 2 hours around high tide"></label>
+        <label><span>Evidence link (optional)</span><input name="source" type="url" placeholder="Club, operator or official notice"></label>
+      </div>
+      <label class="knowledge-check"><input name="review_ack" type="checkbox" required><span>I understand this is a moderated submission, not an instant public update.</span></label>
+      <button class="save-setup" type="submit">Save for review <span>→</span></button>
+      <small class="demo-storage-note">Demo: saved on this device only. Production submissions would enter a review queue with source and reporter credibility checks.</small>
+    </form>
+  </dialog>
   <div class="toast" id="toast" role="status"></div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="spots-extra.js"></script>
-  <script src="app-live.js?v=12.3"></script>
+  <script src="app-live.js?v=12.4"></script>
 </body>
 </html>
