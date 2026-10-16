@@ -15,6 +15,9 @@ wye:{name:'River Wye — Symonds Yat',type:'river',lat:51.8375,lon:-2.64,sea:nul
 const sports={sup:'SUP',wing:'Wing foil',windsurf:'Windsurf',kite:'Kitesurf'}, state={mode:'paddle',sport:'sup',freeSport:'sup',skill:'beginner',skills:{sup:'beginner',wing:'beginner',windsurf:'beginner',kite:'beginner'},spot:null,checks:[0,0,0,0],live:null,currentLive:null,marine:null,sun:[],hourly:[],allHours:[],outlook:[],selectedTime:null};
 ['seaburn','south_shields'].forEach(id=>{if(spots[id])spots[id].supUses=['touring','surf']});
 Object.values(spots).forEach(s=>{if(s.sports?.includes('wing')&&!s.sports.includes('windsurf')&&s.windVenue!==false)s.sports.push('windsurf')});
+Object.assign(spots.brighton,{region:'Sussex',sports:['sup','windsurf','wing'],supUses:['touring','surf'],source:'https://rnli.org/find-my-nearest/lifeguarded-beaches',evidence:'Established public seafront; patrol details require beach-level confirmation',exposure:2});
+Object.assign(spots.ardingly,{region:'Sussex',sports:['sup'],supUses:['touring'],source:'https://www.ardinglyactivitycentre.co.uk/',evidence:'Managed activity centre',exposure:0});
+Object.assign(spots.bewl,{region:'Kent / Sussex',sports:['sup'],supUses:['touring'],source:'https://www.bewlwater.co.uk/',evidence:'Managed reservoir; activity access must be confirmed',exposure:1,recommendationStatus:'research'});
 Object.assign(spots.strangford,{hazard:{severity:'extreme',title:'Strangford Narrows tidal stream',copy:'The Narrows carry strong tidal streams over boulder-strewn ground. This launch is inside the lough; do not turn it into an unguided Narrows trip.',source:'https://sac.jncc.gov.uk/site/UK0016618'}});
 Object.assign(spots.calshot,{hazard:{severity:'high',title:'Solent shipping and tidal channels',copy:'Stay inside the designated Calshot watersports area, obey the seasonal kite restriction and keep clear of the deep-water shipping channel and moving prohibited zones.',source:'https://www.southamptonvts.co.uk/media/u1tfg3nu/sou-lntm-2026-018-port-of-southampton-designated-watersports-areas.pdf'}});
 Object.assign(spots.portland,{hazard:{severity:'context',title:'Portland Race outside the harbour',copy:'Portland Harbour can be comparatively sheltered; Portland Race is not. Do not infer that a green harbour verdict makes the waters off Portland Bill safe.',source:'https://assets.publishing.service.gov.uk/media/5a7af54240f0b66a2fc040a8/SEA8_TechRep_Rec_Boating.pdf'}});
@@ -209,7 +212,7 @@ windsurf:{beginner:['Use a recognised teaching or managed-water launch. Begin up
 wing:{beginner:['Use open space, enough depth and a documented learning launch. Practise the self-rescue before relying on the foil to get home.'],intermediate:['Shallow water can protect a learner but damage a foil. Check depth through the whole launch corridor, not only at the beach.'],advanced:['A foil may hold ground better than a SUP, but offshore wind still demands a downwind exit, reliable board leash and buddy plan.']},
 kite:{beginner:['Use a recognised kite beach and school. Do not improvise a solo launch because the wind colour is green.'],intermediate:['Confirm the launch, landing and full downwind exclusion zone. Keep swimmers outside the kite corridor.'],advanced:['Strong wind is not the only test: gust gradient, tide, hard objects and downwind space can make a famous spot unusable.']}
 };
-function rotatingMateTip(){let sport=state.sport||'sup',skill=state.skill||'beginner',list=mateTips[sport]?.[skill]||mateTips[sport]?.beginner||mateTips.sup.beginner,seed=(state.spot||'home').split('').reduce((a,c)=>a+c.charCodeAt(0),new Date().getDate());return list[seed%list.length]}
+function rotatingMateTip(){let sport=state.sport||'sup',skill=state.skill||'beginner',s=spots[state.spot],d=state.live;if(sport==='sup'&&s?.type==='river')return'If the flow is faster than a comfortable walking pace, rising or carrying debris, do not launch. On moving water use a quick-release waist leash, buoyancy aid, a known downstream exit and a buddy.';if(sport==='sup'&&['lake','reservoir'].includes(s?.type))return'Start into the wind and keep to the shore that gives the simplest landing. Turn around before you are tired so the easier leg brings you back.';if(sport==='sup'&&['Offshore','Cross-offshore'].includes(d?.angle))return'If the wind starts winning, kneel first; if necessary lie prone with the paddle secured under your chest and paddle diagonally—not straight upwind—to the nearest workable shore.';let list=mateTips[sport]?.[skill]||mateTips[sport]?.beginner||mateTips.sup.beginner,seed=(state.spot||'home').split('').reduce((a,c)=>a+c.charCodeAt(0),new Date().getDate());return list[seed%list.length]}
 const v7Render=render;
 render=function(){v7Render();let tip=$('#buddyTip');if(tip)tip.textContent=rotatingMateTip();let headline=$('#sponsorHeadline');if(headline)headline.textContent={sup:'Paddle kit matched to today’s SUP profile',wing:'Wing and foil kit matched to today’s wind range',windsurf:'Sails and boards matched to today’s wind range',kite:'Kite kit matched to today’s documented launch'}[state.sport]||'Relevant kit for today’s profile';if(state.spot)renderWaterStatus(spots[state.spot])};
 
@@ -256,6 +259,7 @@ const coastalTypes=new Set(['coast','harbour','estuary']);
 function activeSupUse(){return state.planSupUse||state.profile?.supDiscipline||'touring'}
 function venueEligible(s){
   if(s.hazardOnly)return true;
+  let levels={beginner:0,intermediate:1,advanced:2};if(s.minSkill&&levels[state.skill]<levels[s.minSkill])return false;
   let supports=s.sports?.includes(state.sport)||(state.sport==='wing'&&s.sports?.includes('windsurf'));
   if(!supports)return false;
   if(state.sport==='sup'){let use=activeSupUse();if(use==='surf')return s.type==='coast'&&s.supUses?.includes('surf');if(use==='whitewater')return s.type==='river'&&s.supUses?.includes('whitewater');if(use==='mixed')return s.supUses?.some(x=>['touring','surf'].includes(x));return s.supUses?.includes('touring')||['lake','reservoir','river','coast','harbour','estuary'].includes(s.type)}
@@ -275,7 +279,7 @@ function strictSignal(s,d){
     if(d.wind>=9||d.wave>=.5||['Offshore','Cross-offshore'].includes(angle))return'amber';
   }
   if(state.sport!=='sup'&&['lake','reservoir'].includes(s.type)&&s.windQuality==='learner'&&state.skill!=='beginner')return'amber';
-  return result;
+  return s.recommendationStatus==='research'&&result==='green'?'amber':result;
 }
 signalFor=function(s,d){return strictSignal(s,d)};
 function applyStrictVisibility(){if(!map)return;Object.entries(spots).forEach(([id,s])=>{let visible=(s.hazardOnly||venueEligible(s))&&inTravelScope(id)&&(!state.rnliOnly||Boolean(s.rnli)),m=markers[id];if(!m)return;if(visible&&!map.hasLayer(m))m.addTo(map);else if(!visible&&map.hasLayer(m))m.removeFrom(map)});$$('#spotSelect option').forEach(o=>{if(!o.value)return;let s=spots[o.value];o.hidden=o.disabled=Boolean(s&&!((s.hazardOnly||venueEligible(s))&&inTravelScope(o.value)&&(!state.rnliOnly||s.rnli)))})}
